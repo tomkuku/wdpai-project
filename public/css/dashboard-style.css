@@ -1,0 +1,128 @@
+.base-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.nav {
+    width: 20vw;
+    height: 100%;
+    background: linear-gradient(180deg, #004179 0%, rgba(39, 96, 138, 0.81986) 99.98%,rgba(217, 217, 217, 0) 100%, #004679 100%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.main {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+nav > img {
+    width: 60%;
+    margin: 2em auto;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    line-height: 2em;
+}
+
+li i {
+    font-size: 1.5em;
+}
+
+.button {
+    border: 1px solid white;
+    border-radius: 1em;
+    margin-left: 1em;
+    text-align: center;
+    letter-spacing: 0.7px;
+    color: white;
+    padding: 0.2em;
+    width: 60%;
+}
+
+ul {
+    list-style-type: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    height: 100%;
+    margin: 0 auto;
+    width: calc(100% - 40px);
+    position: relative;
+}
+
+li {
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+li:last-child {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.fa-solid {
+    font-weight: 900;
+    width: 1em;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 2em;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.7);
+    height: 40px;
+    flex-direction: row;
+}
+
+.add-request-button {
+    background: linear-gradient(180deg, #004179 0%, rgba(39, 96, 138, 0.81986) 99.98%,rgba(217, 217, 217, 0) 100%, #004679 100%);
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 1.5em;
+    color: white;
+    letter-spacing: 0.1em;
+    text-align: center;
+    width: 20%;
+    height: 36px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: bold;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.add-request-button > i {
+    padding: 10px;
+}
+
+.search-bar {
+    width: 50%;
+    height: 36px;
+}
+
+.search-bar>form {
+    height: 100%;
+}
+
+.search-bar>form>input {
+    background-color: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #707070;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: gray;
+    margin: 0;
+    box-sizing: border-box;
+}

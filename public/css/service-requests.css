@@ -1,0 +1,42 @@
+.requests {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2em;
+    padding: 2em;
+    overflow: auto; 
+}
+
+.requests>div {
+    height: 400px;
+    width: 280px;
+    border: 1px solid black;
+    border-radius: 1em 1em 0 0;
+    height: 400px;
+    background: rgba(217, 217, 217, 0.7);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.requests>div>div {
+    height: 50%;
+    color: #004679;
+    margin: 1em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.requests>div>img {
+    height: 50%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 1em 1em 0 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
