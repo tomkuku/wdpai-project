@@ -53,7 +53,7 @@
                             }
                         ?>
                     </div>
-                    <input name="title" type="text" placeholder="Bike name">
+                    <input name="bikename" type="text" placeholder="Bike name">
                     <textarea name="description" rows=5 placeholder="Description"></textarea>
                     <input type="file" name="file"/><br/>
                     <button class="submit-button" type="submit">send</button>

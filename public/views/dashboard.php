@@ -47,28 +47,10 @@
         </header>
         <section class="requests">
             <div id="service-1">
-                <img src="public/img/uploads/pexels-cottonbro-studio-4542852.jpg">
+                <img src="public/uploads/<?= $serviceRequest->getImage() ?>">
                 <div>
-                    <h2>Title</h2>
-                    <p>Description</p>
-                    <p>Price: 200 zł</p>
-                    <p>Date: 10-06-2023</p>
-                </div>
-            </div>
-            <div id="service-2">
-                <img src="public/img/uploads/pexels-javon-swaby-3370153.jpg">
-                <div>
-                    <h2>Title</h2>
-                    <p>Description</p>
-                    <p>Price: 200 zł</p>
-                    <p>Date: 10-06-2023</p>
-                </div>
-            </div>
-            <div id="service-3">
-                <img src="public/img/uploads/pexels-olena-bohovyk-13684844.jpg">
-                <div>
-                    <h2>Title</h2>
-                    <p>Description</p>
+                    <h2><?= $serviceRequest->getBikeName() ?></h2>
+                    <p><?= $serviceRequest->getDescription() ?></p>
                     <p>Price: 200 zł</p>
                     <p>Date: 10-06-2023</p>
                 </div>

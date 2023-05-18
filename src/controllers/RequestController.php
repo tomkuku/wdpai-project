@@ -1,6 +1,7 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__.'/../models/ServiceRequest.php';
 
 class RequestController extends AppController {
    
@@ -17,7 +18,11 @@ class RequestController extends AppController {
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            return $this->render('dashboard', ['messsages' => $this->messages]);
+            $serviceRequest = new ServiceRequest($_POST['bikename'], $_POST['description'], $_FILES['file']['name']);
+
+            var_dump($_POST);
+
+            return $this->render('dashboard', ['messsages' => $this->messages, 'serviceRequest' => $serviceRequest]);
         }
 
         $this->render('add-request', ['messsages' => $this->messages]);
