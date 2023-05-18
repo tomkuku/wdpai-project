@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/dashboard-style.css"></link>
-    <link rel="stylesheet" type="text/css" href="../css/new-request.css"></link>
+    <link rel="stylesheet" type="text/css" href="public/css/dashboard-style.css"></link>
+    <link rel="stylesheet" type="text/css" href="public/css/add-request.css"></link>
     <script src="https://kit.fontawesome.com/2207b84d03.js" crossorigin="anonymous"></script>
     <title>New Request</title>
 </head>
@@ -9,7 +9,7 @@
 <body>
     <div class="base-container">
     <nav class="nav">
-        <image src="../img/bike-logo.svg">
+        <image src="public/img/bike-logo.svg">
         <ul>
             <li>
                 <i class="fa-solid fa-comments"></i>
@@ -41,15 +41,24 @@
                 </form>
             </div>
         </header>
-        <div class="container">
-            <button class="add-image-button">Add Image</button>
-            <input class="input-field" name="bike-name" type="text" placeholder="Bike name">
-            <input class="input-field" name="bike-color" type="text" placeholder="Bike color">
-            <br>
-                <textarea class="input-field-desc" rows = "5" cols = "60" name="description" placeholder="Description"></textarea>
-            <br>
-            <button class="submit-button" type="submit">Submit</button>
-        </div>
+        <section class="request-form">
+                <h1>We'll service your bike!</h1>
+                <form action="addRequest" method="POST" ENCTYPE="multipart/form-data">
+                    <div class="messages">
+                        <?php
+                            if (isset($messages)) {
+                                foreach($messages as $message) {
+                                    echo $message;
+                                }
+                            }
+                        ?>
+                    </div>
+                    <input name="title" type="text" placeholder="Bike name">
+                    <textarea name="description" rows=5 placeholder="Description"></textarea>
+                    <input type="file" name="file"/><br/>
+                    <button class="submit-button" type="submit">send</button>
+                </form>
+            </section>
     </main>
     </div>
 </body>
