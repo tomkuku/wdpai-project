@@ -40,7 +40,7 @@
                     <input placeholder="Search">
                 </form>
             </div>
-            <div class="add-request-button" name>
+            <div class="add-request-button">
                 <i class="fa-solid fa-plus"></i>
                 New Service
             </div>
