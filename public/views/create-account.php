@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/create-account.css"></link>
+    <link rel="stylesheet" type="text/css" href="public/css/create-account.css"></link>
     <title>Create Account Page</title>
 </head>
 <body>
-    <form action="createPage" method="POST">
+    <form action="createAccount" method="POST">
         <div class="container">
             <h1>Sign Up</h1>
-            <p>Please fill in this form to create an account.</p>
+            <?php
+            if (isset($messages)) {
+                foreach ($messages as $message) {
+                    print ($message);
+                }
+            } else {
+                print("Please fill in this form to create an account");
+            }
+            ?>
             <hr>
-        
+
             <label for="psw-repeat"><b>Name</b></label>
             <input type="text" placeholder="Enter Name" name="name" required>
 

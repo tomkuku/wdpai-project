@@ -11,7 +11,7 @@
             <p class="logo-subtitle">Platform to service your bike online</p>
         </div>
         <div class="login-container">
-            <form class="login" action="login", method="POST">
+            <form class="login" action="login" method="POST">
                 <div class="message">
                     <?php if (isset($messages))
                     foreach ($messages as $message) {
@@ -21,7 +21,8 @@
                 </div>
                 <input class="input-field" name="email" type="text" placeholder="email@email.com">
                 <input class="input-field" name="password" type="password" placeholder="password">
-                <button class="button" type="submit">DUPA</button>
+                <button class="button" type="submit">Login</button>
+                <input class="button" type="submit" name="create-account" value="Create Account"/>
             </form>
         </div>
     </div>
