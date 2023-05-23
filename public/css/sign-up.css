@@ -23,12 +23,12 @@ button:hover {
   opacity:1;
 }
 
-.cancelbtn {
+.cancel-button {
   padding: 14px 20px;
   background-color: #f44336;
 }
 
-.cancelbtn, .signupbtn {
+.cancel-button, .sign-up-button {
   float: left;
   width: 50%;
 }

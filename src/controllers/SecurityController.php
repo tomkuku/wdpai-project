@@ -12,8 +12,8 @@ class SecurityController extends AppController {
             return $this->render('login');
         }
 
-        if (isset($_POST["create-account"])) {
-            return $this->render('create-account');
+        if (isset($_POST["sign-up-button"])) {
+            return $this->render('sign-up');
         }
 
         $email = $_POST["email"];
@@ -30,9 +30,13 @@ class SecurityController extends AppController {
         return $this->render('dashboard');
     }
 
-    public function createAccount() {
+    public function signUp() {
         if (!$this->isPost()) {
-            return $this->render('create-account');
+            return $this->render('sign-up');
+        }
+        
+        if (isset($_POST["cancel-button"])) {
+            return $this->render('login');
         }
 
         $name = $_POST["name"];
@@ -43,10 +47,10 @@ class SecurityController extends AppController {
         $password2 = $_POST["psw-repeat"];
 
         if ($password1 !== $password2) {
-            return $this->render('create-account', ['messages' => ["Passwords are not equal!"]]);
+            return $this->render('sign-up', ['messages' => ["Passwords are not equal!"]]);
         }
 
-        $this->render('create-account', ['messages' => ["Account created!"]]);
+        $this->render('sign-up', ['messages' => ["Account created!"]]);
 
         // TODO: Connect Database
     }
