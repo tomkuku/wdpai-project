@@ -8,9 +8,13 @@ class SecurityController extends AppController {
     public function login() {
         $user = new User("tk@a.pl", "123", 'tom', 'tokk');
 
-        // if ($this->isPost()) {
-        //     return $this->login('login');
-        // }
+        if (!$this->isPost()) {
+            return $this->render('login');
+        }
+
+        if (isset($_POST["sign-up-button"])) {
+            return $this->render('sign-up');
+        }
 
         $email = $_POST["email"];
         $password = $_POST["password"];
@@ -24,5 +28,34 @@ class SecurityController extends AppController {
         }
 
         return $this->render('dashboard');
+    }
+
+    public function signUp() {
+        if (!$this->isPost()) {
+            return $this->render('sign-up');
+        }
+        
+        if (isset($_POST["cancel-button"])) {
+            return $this->render('login');
+        }
+
+        $name = $_POST["name"];
+        $surname = $_POST["surname"];
+        $email = $_POST["email"];
+
+        $password1 = $_POST["psw"];
+        $password2 = $_POST["psw-repeat"];
+
+        if ($name != null || $surname != null || $email != null) {
+            return $this->render('sign-up', ['messages' => ["Enter all values!"]]);
+        }
+
+        if ($password1 !== $password2) {
+            return $this->render('sign-up', ['messages' => ["Passwords are not equal!"]]);
+        }
+
+        $this->render('sign-up', ['messages' => ["Account created!"]]);
+
+        // TODO: Connect Database
     }
 } 

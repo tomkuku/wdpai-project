@@ -9,5 +9,6 @@ Routing::get('index', 'DefaultController');
 Routing::get('projects', 'DefaultController');
 Routing::post('login', 'SecurityController');
 Routing::post('addRequest', 'RequestController');
+Routing::post('signUp', 'SecurityController');
 
 Routing::run($path);
