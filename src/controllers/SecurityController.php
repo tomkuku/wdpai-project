@@ -6,6 +6,14 @@ require_once __DIR__.'/../repository/UserRepository.php';
 
 class SecurityController extends AppController {
 
+    private $userRepository;
+
+    public function __construct() {
+        parent::__construct();
+        $this->userRepository = new UserRepository();
+    }
+
+    public function login() {
         if (!$this->isPost()) {
             return $this->render('login');
         }
@@ -17,7 +25,7 @@ class SecurityController extends AppController {
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        $user = $userRepository->getUser($email);
+        $user = $this->userRepository->getUser($email);
 
         if (!$user) {
             return $this->render('login', ['messages' => ['User not found!']]);
@@ -43,16 +51,16 @@ class SecurityController extends AppController {
             return $this->render('login');
         }
 
-        $name = $_POST["name"];
-        $surname = $_POST["surname"];
+        // $name = $_POST["name"];
+        // $surname = $_POST["surname"];
         $email = $_POST["email"];
 
         $password1 = $_POST["psw"];
         $password2 = $_POST["psw-repeat"];
 
-        if ($name != null || $surname != null || $email != null) {
-            return $this->render('sign-up', ['messages' => ["Enter all values!"]]);
-        }
+        // if ($name != null || $surname != null || $email != null) {
+        //     return $this->render('sign-up', ['messages' => ["Enter all values!"]]);
+        // }
 
         if ($password1 !== $password2) {
             return $this->render('sign-up', ['messages' => ["Passwords are not equal!"]]);
