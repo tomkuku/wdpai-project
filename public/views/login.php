@@ -12,6 +12,8 @@
         </div>
 
         <div class="container">
+            <h1>Login</h1>
+
             <div class="message">
                 <?php if (isset($messages))
                     foreach ($messages as $message) {
@@ -19,15 +21,15 @@
                     } 
                 ?>
                 <br>
-                <spacer type="vertical" width="0" height="20"></spacer>
+                <spacer type="vertical" width="0" height="10"></spacer>
                 <br>
             </div>
 
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Email" name="email">
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw">
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Password" name="password">
             
             <br>
                 <spacer type="vertical" width="0" height="50"></spacer>

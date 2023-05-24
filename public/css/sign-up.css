@@ -109,6 +109,11 @@ hr {
   display: table;
 }
 
+.logo-container {
+  width: 100%;
+  text-align: center;
+}
+
 @media screen and (max-width: 300px) {
   .cancelbtn, .signupbtn {
     width: 100%;

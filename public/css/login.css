@@ -65,6 +65,11 @@ span.psw {
     padding-top: 16px;
 }
 
+.logo-container {
+    width: 100%;
+    text-align: center;
+}
+
 @media screen and (max-width: 300px) {
     span.psw {
         display: block;
@@ -74,9 +79,4 @@ span.psw {
     .cancelbtn {
         width: 100%;
     }
-}
-
-.logo-container {
-    width: 100%;
-    text-align: center;
 }

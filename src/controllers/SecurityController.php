@@ -46,6 +46,10 @@ class SecurityController extends AppController {
         $password1 = $_POST["psw"];
         $password2 = $_POST["psw-repeat"];
 
+        if ($name != null || $surname != null || $email != null) {
+            return $this->render('sign-up', ['messages' => ["Enter all values!"]]);
+        }
+
         if ($password1 !== $password2) {
             return $this->render('sign-up', ['messages' => ["Passwords are not equal!"]]);
         }
