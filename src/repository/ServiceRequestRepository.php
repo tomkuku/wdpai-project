@@ -6,7 +6,7 @@ require_once __DIR__.'/../models/ServiceRequest.php';
 class ServiceRequestRepository extends Repository {
     public function getServiceRequest(int $id): ?ServiceRequest {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM serviceRequests WHERE id = :id;
+            SELECT * FROM service_request WHERE id = :id;
         ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -22,13 +22,26 @@ class ServiceRequestRepository extends Repository {
             "Cos",
             "cos"
         );
+    }
 
-//        return new User(
-//            $request['email'],
-//            $request['password'],
-//            $request['name'],
-//            $request['username']
-//        );
+    public function getAllServiceRequests(): array {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM service_request;
+        ');
+        $stmt->execute();
+        $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($requests as $request) {
+            $result[] = new ServiceRequest(
+                $request['bike_name'],
+                $request['description'],
+                $request['file_name']
+            );
+        }
+
+        return $result;
     }
 
     public function addRequest(ServiceRequest $request) {
@@ -38,7 +51,8 @@ class ServiceRequestRepository extends Repository {
         ');
 
         $price = 200;
-        $owner_id = 2;
+        $owner_id = 2
+        ;
 
         $stmt->execute([
             $request->getBikeName(),

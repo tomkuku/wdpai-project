@@ -46,24 +46,17 @@
             </div>
         </header>
         <section class="requests">
-            <div id="service-1">
-                <img src="public/uploads/<?= $serviceRequest->getImage() ?>">
-                <div>
-                    <h2><?= $serviceRequest->getBikeName() ?></h2>
-                    <p><?= $serviceRequest->getDescription() ?></p>
-                    <p>Price: 200 zł</p>
-                    <p>Date: 10-06-2023</p>
+            <?php foreach($serviceRequests as $request): ?>
+                <div id="service-1">
+                    <img src="public/uploads/<?= $request->getImage() ?>">
+                    <div>
+                        <h2><?= $request->getBikeName() ?></h2>
+                        <p><?= $request->getDescription() ?></p>
+                        <p>Price: 200 zł</p>
+                        <p>Date: 10-06-2023</p>
+                    </div>
                 </div>
-            </div>
-            <div id="service-4">
-                <img src="public/img/uploads/pexels-taryn-elliott-4198566.jpg">
-                <div>
-                    <h2>Title</h2>
-                    <p>Description</p>
-                    <p>Price: 200 zł</p>
-                    <p>Date: 10-06-2023</p>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </section>
     </main>
     </div>

@@ -49,4 +49,10 @@ class RequestController extends AppController {
         }
         return true;
     }
+
+    public function serviceRequests() {
+        $requests = $this->serviceRequestRepository->getAllServiceRequests();
+
+        $this->render('dashboard', ['serviceRequests' => $requests]);
+    }
 } 
