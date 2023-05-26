@@ -2,6 +2,7 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../models/ServiceRequest.php';
+require_once __DIR__.'/../repository/ServiceRequestRepository.php';
 
 class RequestController extends AppController {
    
@@ -10,6 +11,12 @@ class RequestController extends AppController {
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
     private $messages = [];
+    private $serviceRequestRepository;
+
+    public function __construct() {
+        parent::__construct();
+        $this->serviceRequestRepository = new ServiceRequestRepository();
+    }
 
     public function addRequest() {
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->isFileValid($_FILES['file'])) {
@@ -22,7 +29,12 @@ class RequestController extends AppController {
 
             var_dump($_POST);
 
-            return $this->render('dashboard', ['messsages' => $this->messages, 'serviceRequest' => $serviceRequest]);
+            $this->serviceRequestRepository->addRequest($serviceRequest);
+
+            return $this->render('dashboard', [
+                'messsages' => $this->messages,
+                'serviceRequests' => $this->serviceRequestRepository->getAllServiceRequests()
+            ]);
         }
 
         $this->render('add-request', ['messsages' => $this->messages]);
@@ -39,5 +51,11 @@ class RequestController extends AppController {
             return false;
         }
         return true;
+    }
+
+    public function serviceRequests() {
+        $requests = $this->serviceRequestRepository->getAllServiceRequests();
+
+        $this->render('dashboard', ['serviceRequests' => $requests]);
     }
 } 

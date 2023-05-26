@@ -1,16 +1,16 @@
 <?php
 
 class User {
-    private $username;
-    private $name;
+    // private $username;
+    // private $name;
     private $password;
     private $email;
 
-    public function __construct(string $email, string $password, string $name, string $username) {
+    public function __construct(string $email, string $password) {
         $this->email = $email;
         $this->password = $password;
-        $this->name = $name;
-        $this->username = $username;
+        // $this->name = $name;
+        // $this->username = $username;
     }
 
     public function setEmail(string $email) {
@@ -21,13 +21,13 @@ class User {
         $this->password = $password;
     }
 
-    public function setName(string $name) {
-        $this->name = $name;
-    }
+    // public function setName(string $name) {
+    //     $this->name = $name;
+    // }
 
-    public function setUsername(string $username) {
-        $this->username = $username;
-    }
+    // public function setUsername(string $username) {
+    //     $this->username = $username;
+    // }
 
     public function getEmail(): string {
         return $this->email;
@@ -37,11 +37,11 @@ class User {
         return $this->password;
     }
 
-    public function getName(): string {
-        return $this->name;
-    }
+    // public function getName(): string {
+    //     return $this->name;
+    // }
 
-    public function getUsername(): string {
-        return $this->username;
-    }
+    // public function getUsername(): string {
+    //     return $this->username;
+    // }
 }
