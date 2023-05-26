@@ -31,7 +31,10 @@ class RequestController extends AppController {
 
             $this->serviceRequestRepository->addRequest($serviceRequest);
 
-            return $this->render('dashboard', ['messsages' => $this->messages, 'serviceRequest' => $serviceRequest]);
+            return $this->render('dashboard', [
+                'messsages' => $this->messages,
+                'serviceRequests' => $this->serviceRequestRepository->getAllServiceRequests()
+            ]);
         }
 
         $this->render('add-request', ['messsages' => $this->messages]);
