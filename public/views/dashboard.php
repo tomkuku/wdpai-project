@@ -46,7 +46,10 @@
             </div>
         </header>
         <section class="requests">
-            <?php foreach($serviceRequests as $request): ?>
+            <?php if (empty($serviceRequests)) { ?>
+                <h1>No requests!</h1>
+            <?php } else { ?>
+                <?php foreach($serviceRequests as $request): ?>
                 <div id="service-1">
                     <img src="public/uploads/<?= $request->getImage() ?>">
                     <div>
@@ -56,7 +59,9 @@
                         <p>Date: 10-06-2023</p>
                     </div>
                 </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php } ?>
+
         </section>
     </main>
     </div>

@@ -39,7 +39,8 @@ class SecurityController extends AppController {
             return $this->render('login', ["messages" => ["Invalid password"]]);
         }
 
-        return $this->render('dashboard');
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/serviceRequests");
     }
 
     public function signUp() {
@@ -51,16 +52,19 @@ class SecurityController extends AppController {
             return $this->render('login');
         }
 
-        // $name = $_POST["name"];
-        // $surname = $_POST["surname"];
         $email = $_POST["email"];
-
         $password1 = $_POST["psw"];
         $password2 = $_POST["psw-repeat"];
 
-        // if ($name != null || $surname != null || $email != null) {
-        //     return $this->render('sign-up', ['messages' => ["Enter all values!"]]);
-        // }
+        $name = $_POST["name"];
+        $surname = $_POST["surname"];
+        $phone = "123456789";
+
+        $user = $this->userRepository->getUser($email);
+
+        if ($user) {
+            return $this->render('sign-up', ['messages' => ['User with this email address already exists!']]);
+        }
 
         if ($password1 !== $password2) {
             return $this->render('sign-up', ['messages' => ["Passwords are not equal!"]]);
@@ -68,6 +72,14 @@ class SecurityController extends AppController {
 
         $this->render('sign-up', ['messages' => ["Account created!"]]);
 
-        // TODO: Connect Database
+        $user = new User(
+            $email,
+            $password1,
+            $name,
+            $surname,
+            $phone
+        );
+
+        $this->userRepository->addUser($user);
     }
 } 
