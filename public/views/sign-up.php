@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/sign-up.css"></link>
-    <title>Create Account Page</title>
+    <script type="text/javascript" src="./public/js/script.js" defer></script>
+    <title>Sign Up Page</title>
 </head>
 <body>
     <form action="signUp" method="POST">
