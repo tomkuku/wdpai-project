@@ -10,5 +10,7 @@ Routing::get('serviceRequests', 'RequestController');
 Routing::post('login', 'SecurityController');
 Routing::post('addRequest', 'RequestController');
 Routing::post('signUp', 'SecurityController');
+Routing::post('search', 'RequestController');
+Routing::post('requests', 'RequestController');
 
 Routing::run($path);

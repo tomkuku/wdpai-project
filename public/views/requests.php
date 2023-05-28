@@ -3,6 +3,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/dashboard-style.css"></link>
     <link rel="stylesheet" type="text/css" href="public/css/service-requests.css"></link>
     <script src="https://kit.fontawesome.com/2207b84d03.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./public/js/search.js" defer></script>
     <title>Dashboard Page</title>
 </head>
 
@@ -36,9 +37,7 @@
     <main class="main">
         <header class="header">
             <div class="search-bar">
-                <form>
-                    <input placeholder="Search">
-                </form>
+                <input placeholder="Search requests">
             </div>
             <div class="add-request-button">
                 <i class="fa-solid fa-plus"></i>
@@ -46,23 +45,30 @@
             </div>
         </header>
         <section class="requests">
-            <?php if (empty($serviceRequests)) { ?>
-                <h1>No requests!</h1>
-            <?php } else { ?>
-                <?php foreach($serviceRequests as $request): ?>
+            <?php foreach($serviceRequests as $request): ?>
                 <div id="service-1">
                     <img src="public/uploads/<?= $request->getImage() ?>">
                     <div>
                         <h2><?= $request->getBikeName() ?></h2>
                         <p><?= $request->getDescription() ?></p>
-                        <p>Price: 200 zł</p>
-                        <p>Date: 10-06-2023</p>
+<!--                        <p>Price: 200 zł</p>-->
+<!--                        <p>Date: 10-06-2023</p>-->
                     </div>
                 </div>
-                <?php endforeach; ?>
-            <?php } ?>
-
+            <?php endforeach; ?>
         </section>
     </main>
     </div>
 </body>
+
+<template id="request-template">
+    <div id="">
+        <img src="">
+        <div>
+            <h2>bikeName</h2>
+            <p>description</p>
+            <p>price</p>
+            <p>date</p>
+        </div>
+    </div>
+</template>
