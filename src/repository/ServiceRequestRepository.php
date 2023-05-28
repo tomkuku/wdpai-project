@@ -51,8 +51,7 @@ class ServiceRequestRepository extends Repository {
         ');
 
         $price = 200;
-        $owner_id = 2
-        ;
+        $owner_id = 3;
 
         $stmt->execute([
             $request->getBikeName(),
@@ -61,5 +60,17 @@ class ServiceRequestRepository extends Repository {
             $request->getImage(),
             $owner_id
         ]);
+    }
+
+    public function getRequestByBikeName(string $searchString) {
+        $searchString = '%'.strtolower($searchString).'%';
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM service_request WHERE LOWER(bike_name) LIKE :search OR LOWER(description) LIKE :search
+        ');
+        $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

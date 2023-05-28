@@ -31,7 +31,7 @@ class RequestController extends AppController {
 
             $this->serviceRequestRepository->addRequest($serviceRequest);
 
-            return $this->render('dashboard', [
+            return $this->render('requests', [
                 'messsages' => $this->messages,
                 'serviceRequests' => $this->serviceRequestRepository->getAllServiceRequests()
             ]);
@@ -54,8 +54,21 @@ class RequestController extends AppController {
     }
 
     public function serviceRequests() {
+        print("TEST 2");
         $requests = $this->serviceRequestRepository->getAllServiceRequests();
+        $this->render('requests', ['serviceRequests' => $requests]);
+    }
 
-        $this->render('dashboard', ['serviceRequests' => $requests]);
+    public function search() {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            http_response_code(200);
+
+            echo json_encode($this->serviceRequestRepository->getRequestByBikeName($decoded['search']));
+        }
     }
 } 
