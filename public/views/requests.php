@@ -51,8 +51,13 @@
                     <div>
                         <h2><?= $request->getBikeName() ?></h2>
                         <p><?= $request->getDescription() ?></p>
-<!--                        <p>Price: 200 zł</p>-->
-<!--                        <p>Date: 10-06-2023</p>-->
+                        <p><?= "Price: ".$request->getPrice()." zł" ?></p>
+                        <p><?= "Created at: ".$request->getDate() ?></p>
+                        <p><?php if($request->isAccepted() === 'true') {
+                            print("Accepted");
+                        } else {
+                            print("Not yet accepted");
+                        } ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -66,9 +71,10 @@
         <img src="">
         <div>
             <h2>bikeName</h2>
-            <p>description</p>
-            <p>price</p>
-            <p>date</p>
+            <p name="description">description</p>
+            <p name="price">price</p>
+            <p name="date">date</p>
+            <p name="isAccepted">isAccepted</p>
         </div>
     </div>
 </template>

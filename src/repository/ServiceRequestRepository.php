@@ -20,7 +20,10 @@ class ServiceRequestRepository extends Repository {
         return new ServiceRequest(
             "Trek Slash",
             "Cos",
-            "cos"
+            "cos",
+            220,
+            "false",
+            "01-01-2023"
         );
     }
 
@@ -37,7 +40,10 @@ class ServiceRequestRepository extends Repository {
             $result[] = new ServiceRequest(
                 $request['bike_name'],
                 $request['description'],
-                $request['file_name']
+                $request['file_name'],
+                $request['price'],
+                $request['is_accepted'],
+                $request['date']
             );
         }
 
@@ -46,19 +52,20 @@ class ServiceRequestRepository extends Repository {
 
     public function addRequest(ServiceRequest $request) {
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO public.service_request (bike_name, description, price, file_name, owner_id)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO public.service_request (bike_name, description, price, file_name, owner_id, is_accepted, date)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ');
 
-        $price = 200;
         $owner_id = 3;
 
         $stmt->execute([
             $request->getBikeName(),
             $request->getDescription(),
-            $price,
+            $request->getPrice(),
             $request->getImage(),
-            $owner_id
+            $owner_id,
+            $request->isAccepted(),
+            $request->getDate()
         ]);
     }
 

@@ -10,8 +10,8 @@ class User {
     public function __construct(string $email, string $password, string $name, string $surname, string $phone) {
         $this->email = $email;
         $this->password = $password;
-         $this->name = $name;
-         $this->surname = $surname;
+        $this->name = $name;
+        $this->surname = $surname;
         $this->phone = $phone;
     }
 

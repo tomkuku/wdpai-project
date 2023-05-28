@@ -34,13 +34,6 @@
         </ul>
     </nav>
     <main class="main">
-        <header class="header">
-            <div class="search-bar">
-                <form>
-                    <input placeholder="Search">
-                </form>
-            </div>
-        </header>
         <section class="request-form">
                 <h1>We'll service your bike!</h1>
                 <form action="addRequest" method="POST" ENCTYPE="multipart/form-data">
@@ -55,6 +48,7 @@
                     </div>
                     <input name="bikename" type="text" placeholder="Bike name">
                     <textarea name="description" rows=5 placeholder="Description"></textarea>
+                    <input name="price" type="text" placeholder="Price">
                     <input type="file" name="file"/><br/>
                     <button class="submit-button" type="submit">send</button>
                 </form>

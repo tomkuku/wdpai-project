@@ -25,9 +25,16 @@ class RequestController extends AppController {
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            $serviceRequest = new ServiceRequest($_POST['bikename'], $_POST['description'], $_FILES['file']['name']);
+            $date = date('Y-m-d H:i:s');
 
-            var_dump($_POST);
+            $serviceRequest = new ServiceRequest(
+                $_POST['bikename'],
+                $_POST['description'],
+                $_FILES['file']['name'],
+                $_POST['price'],
+                "false",
+                $date
+            );
 
             $this->serviceRequestRepository->addRequest($serviceRequest);
 
@@ -54,7 +61,6 @@ class RequestController extends AppController {
     }
 
     public function serviceRequests() {
-        print("TEST 2");
         $requests = $this->serviceRequestRepository->getAllServiceRequests();
         $this->render('requests', ['serviceRequests' => $requests]);
     }
