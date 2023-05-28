@@ -51,8 +51,9 @@
                     <input name="price" type="text" placeholder="Price">
                     <input type="file" name="file"/><br/>
                     <button class="submit-button" type="submit">send</button>
+                    <input class="cancel-button" type="submit" name="cancel-button" value="Back">
                 </form>
-            </section>
+        </section>
     </main>
     </div>
 </body>

@@ -19,6 +19,12 @@ class RequestController extends AppController {
     }
 
     public function addRequest() {
+        if (isset($_POST["cancel-button"])) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/serviceRequests");
+            return;
+        }
+
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->isFileValid($_FILES['file'])) {
             move_uploaded_file(
                 $_FILES['file']['tmp_name'], 

@@ -40,8 +40,7 @@
                 <input placeholder="Search requests">
             </div>
             <div class="add-request-button">
-                <i class="fa-solid fa-plus"></i>
-                New Service
+                <a href="/addRequest"> <i class="fas fa-plus"></i>New Service</a>
             </div>
         </header>
         <section class="requests">
