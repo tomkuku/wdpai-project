@@ -23,7 +23,7 @@ class SecurityController extends AppController {
         }
 
         $email = $_POST["email"];
-        $password = $_POST["password"];
+        $password = md5($_POST["password"]);
 
         $user = $this->userRepository->getUser($email);
 
@@ -53,8 +53,8 @@ class SecurityController extends AppController {
         }
 
         $email = $_POST["email"];
-        $password1 = $_POST["psw"];
-        $password2 = $_POST["psw-repeat"];
+        $password1 = md5($_POST["psw"]);
+        $password2 = md5($_POST["psw-repeat"]);
 
         $name = $_POST["name"];
         $surname = $_POST["surname"];

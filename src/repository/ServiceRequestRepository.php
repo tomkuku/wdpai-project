@@ -4,29 +4,6 @@ require_once 'Repository.php';
 require_once __DIR__.'/../models/ServiceRequest.php';
 
 class ServiceRequestRepository extends Repository {
-    public function getServiceRequest(int $id): ?ServiceRequest {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM service_request WHERE id = :id;
-        ');
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $request = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($request == false) {
-            return null;
-        }
-
-        return new ServiceRequest(
-            "Trek Slash",
-            "Cos",
-            "cos",
-            220,
-            "false",
-            "01-01-2023"
-        );
-    }
-
     public function getAllServiceRequests(): array {
         $result = [];
 
@@ -57,7 +34,7 @@ class ServiceRequestRepository extends Repository {
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ');
 
-        $owner_id = 3;
+        $owner_id = 4;
 
         $stmt->execute([
             $request->getBikeName(),
