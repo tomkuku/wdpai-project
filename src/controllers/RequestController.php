@@ -44,10 +44,9 @@ class RequestController extends AppController {
 
             $this->serviceRequestRepository->addRequest($serviceRequest);
 
-            return $this->render('requests', [
-                'messsages' => $this->messages,
-                'serviceRequests' => $this->serviceRequestRepository->getAllServiceRequests()
-            ]);
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/serviceRequests");
+            return;
         }
 
         $this->render('add-request', ['messsages' => $this->messages]);
@@ -82,5 +81,12 @@ class RequestController extends AppController {
 
             echo json_encode($this->serviceRequestRepository->getRequestByBikeName($decoded['search']));
         }
+    }
+
+    public function acceptRequest(string $id) {
+        $id = intval($id);
+
+        $this->serviceRequestRepository->acceptRequest($id);
+        http_response_code(200);
     }
 } 

@@ -41,7 +41,6 @@ function createRequest(request) {
     title.innerHTML = request.bike_name;
 
     const description = clone.querySelector('p[name="description"]');
-    console.log(description);
     description.innerHTML = request.description;
 
     const priceFiled = clone.querySelector('p[name="price"]');
@@ -53,11 +52,14 @@ function createRequest(request) {
     dateField.innerHTML = date.concat(request.date);
 
     const isAcceptedField = clone.querySelector('p[name="isAccepted"]');
+    const acceptButton = clone.querySelector('button[name="accept-button"]');
     const isAccepted = request.is_accepted;
     if (isAccepted == 'true') {
         isAcceptedField.innerHTML = 'Accepted';
+        acceptButton.disabled = true;
     } else {
         isAcceptedField.innerHTML = 'Not yet accepted';
+        acceptButton.disabled = false;
     }
 
     requestContainer.appendChild(clone);

@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/service-requests.css"></link>
     <script src="https://kit.fontawesome.com/2207b84d03.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/accept.js" defer></script>
     <title>Dashboard Page</title>
 </head>
 
@@ -45,18 +46,19 @@
         </header>
         <section class="requests">
             <?php foreach($serviceRequests as $request): ?>
-                <div id="service-1">
+                <div id="<?= $request->getId(); ?>">
                     <img src="public/uploads/<?= $request->getImage() ?>">
                     <div>
                         <h2><?= $request->getBikeName() ?></h2>
                         <p><?= $request->getDescription() ?></p>
                         <p><?= "Price: ".$request->getPrice()." zł" ?></p>
                         <p><?= "Created at: ".$request->getDate() ?></p>
-                        <p><?php if($request->isAccepted() === 'true') {
+                        <p name="isAccepted"><?php if($request->isAccepted() === 'true') {
                             print("Accepted");
                         } else {
                             print("Not yet accepted");
                         } ?></p>
+                        <button name="accept-button" <?php if($request->isAccepted() === 'true') { echo 'disabled'; } ?>>Accept</button>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -74,6 +76,7 @@
             <p name="price">price</p>
             <p name="date">date</p>
             <p name="isAccepted">isAccepted</p>
+            <button name="accept-button">Accept</button>
         </div>
     </div>
 </template>

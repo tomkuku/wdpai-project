@@ -43,7 +43,8 @@ class ServiceRequestRepository extends Repository {
                 $request['file_name'],
                 $request['price'],
                 $request['is_accepted'],
-                $request['date']
+                $request['date'],
+                $request['id']
             );
         }
 
@@ -79,5 +80,17 @@ class ServiceRequestRepository extends Repository {
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function acceptRequest(int $id) {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE service_request SET "is_accepted" = :accepted WHERE id = :id
+         ');
+
+        $accepted = 'true';
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':accepted', $accepted, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
