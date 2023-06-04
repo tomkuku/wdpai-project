@@ -1,11 +1,8 @@
-const acceptButtons = document.querySelectorAll('button[name="accept-button"]');
-
-function accept() {
-    const requests = this;
-    const container = requests.parentElement.parentElement;
-    const id = container.getAttribute("id");
+function acceptRequest(id) {
+    const query = 'div[id="'.concat(id,'"]')
+    const container = document.querySelector(query);
     const isAcceptedField = container.querySelector('p[name="isAccepted"]');
-    const button = container.querySelector('button[name="accept-button"]');
+    const button = container.querySelector('input[name="accept-button"]');
 
     fetch(`/acceptRequest/${id}`)
         .then(function () {
@@ -13,5 +10,3 @@ function accept() {
             button.disabled = true;
         })
 }
-
-acceptButtons.forEach(button => button.addEventListener("click", accept));

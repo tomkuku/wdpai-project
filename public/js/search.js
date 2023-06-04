@@ -1,6 +1,22 @@
 const search = document.querySelector('input[placeholder="Search requests"]');
 const requestContainer = document.querySelector(".requests");
 
+// function acceptRequest(id) {
+//     console.log("UUUU");
+//     console.log(id);
+//
+//     const query = 'div[id="'.concat(id,'"]')
+//     const container = document.querySelector(query);
+//     const isAcceptedField = container.querySelector('p[name="isAccepted"]');
+//     const button = container.querySelector('button[name="accept-button"]');
+//
+//     fetch(`/acceptRequest/${id}`)
+//         .then(function () {
+//             isAcceptedField.innerHTML = 'Accepted';
+//             button.disabled = true;
+//         })
+// }
+
 search.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
@@ -52,7 +68,7 @@ function createRequest(request) {
     dateField.innerHTML = date.concat(request.date);
 
     const isAcceptedField = clone.querySelector('p[name="isAccepted"]');
-    const acceptButton = clone.querySelector('button[name="accept-button"]');
+    const acceptButton = clone.querySelector('input[name="accept-button"]');
     const isAccepted = request.is_accepted;
     if (isAccepted == 'true') {
         isAcceptedField.innerHTML = 'Accepted';
@@ -60,7 +76,10 @@ function createRequest(request) {
     } else {
         isAcceptedField.innerHTML = 'Not yet accepted';
         acceptButton.disabled = false;
+        const reqq = "acceptRequest(".concat(request.id,")");
+        acceptButton.setAttribute("onclick",reqq);
     }
+
 
     requestContainer.appendChild(clone);
 }

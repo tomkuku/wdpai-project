@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/service-requests.css"></link>
     <script src="https://kit.fontawesome.com/2207b84d03.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
-    <script type="text/javascript" src="./public/js/accept.js" defer></script>
+    <script type="text/javascript" src="./public/js/accept.js"></script>
     <title>Dashboard Page</title>
 </head>
 
@@ -58,7 +58,9 @@
                         } else {
                             print("Not yet accepted");
                         } ?></p>
-                        <button name="accept-button" <?php if($request->isAccepted() === 'true') { echo 'disabled'; } ?>>Accept</button>
+                        <input name="accept-button" type="button" onclick="acceptRequest(<?= $request->getId(); ?>)" value="Accept"
+                            <?php if($request->isAccepted() === 'true') { echo "disabled"; } ?>
+                        />
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -76,7 +78,7 @@
             <p name="price">price</p>
             <p name="date">date</p>
             <p name="isAccepted">isAccepted</p>
-            <button name="accept-button">Accept</button>
+            <input name="accept-button" type="button" value="Accept"/>
         </div>
     </div>
 </template>
