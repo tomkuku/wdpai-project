@@ -10,6 +10,7 @@ class SecurityController extends AppController {
 
     public function __construct() {
         parent::__construct();
+
         $this->userRepository = new UserRepository();
     }
 
@@ -38,6 +39,9 @@ class SecurityController extends AppController {
         if ($user->getPassword() != $password) {
             return $this->render('login', ["messages" => ["Invalid password"]]);
         }
+
+        $_SESSION['user-type'] = $user->getType();
+        $_SESSION['user-id'] = $this->userRepository->getUserId($user);
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/serviceRequests");

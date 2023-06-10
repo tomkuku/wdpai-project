@@ -15,6 +15,7 @@ class RequestController extends AppController {
 
     public function __construct() {
         parent::__construct();
+        session_start();
         $this->serviceRequestRepository = new ServiceRequestRepository();
     }
 

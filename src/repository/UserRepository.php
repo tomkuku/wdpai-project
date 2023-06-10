@@ -62,4 +62,16 @@ class UserRepository extends Repository {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data['id'];
     }
+
+    public function getUserId(User $user): int {
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM users WHERE email = :email AND password = :password
+        ');
+        $stmt->bindParam(':email', $user->getEmail(), PDO::PARAM_STR);
+        $stmt->bindParam(':password', $user->getPassword(), PDO::PARAM_STR);
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data['id'];
+    }
 }

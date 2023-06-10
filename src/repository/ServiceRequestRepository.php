@@ -34,7 +34,7 @@ class ServiceRequestRepository extends Repository {
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ');
 
-        $owner_id = 4;
+        $owner_id = (int)$_SESSION['user-id'];
 
         $stmt->execute([
             $request->getBikeName(),
