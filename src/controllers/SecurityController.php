@@ -10,6 +10,7 @@ class SecurityController extends AppController {
 
     public function __construct() {
         parent::__construct();
+
         $this->userRepository = new UserRepository();
     }
 
@@ -23,7 +24,7 @@ class SecurityController extends AppController {
         }
 
         $email = $_POST["email"];
-        $password = $_POST["password"];
+        $password = md5($_POST["password"]);
 
         $user = $this->userRepository->getUser($email);
 
@@ -39,6 +40,9 @@ class SecurityController extends AppController {
             return $this->render('login', ["messages" => ["Invalid password"]]);
         }
 
+        $_SESSION['user-type'] = $user->getType();
+        $_SESSION['user-id'] = $this->userRepository->getUserId($user);
+
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/serviceRequests");
     }
@@ -53,12 +57,12 @@ class SecurityController extends AppController {
         }
 
         $email = $_POST["email"];
-        $password1 = $_POST["psw"];
-        $password2 = $_POST["psw-repeat"];
+        $password1 = md5($_POST["psw"]);
+        $password2 = md5($_POST["psw-repeat"]);
 
         $name = $_POST["name"];
         $surname = $_POST["surname"];
-        $phone = "123456789";
+        $userType = (int)$_POST["user-type"];
 
         $user = $this->userRepository->getUser($email);
 
@@ -70,16 +74,16 @@ class SecurityController extends AppController {
             return $this->render('sign-up', ['messages' => ["Passwords are not equal!"]]);
         }
 
-        $this->render('sign-up', ['messages' => ["Account created!"]]);
-
         $user = new User(
             $email,
             $password1,
             $name,
             $surname,
-            $phone
+            $userType
         );
 
         $this->userRepository->addUser($user);
+
+        $this->render('login', ["messages" => ["Account created!"]]);
     }
 } 

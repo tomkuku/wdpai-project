@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/service-requests.css"></link>
     <script src="https://kit.fontawesome.com/2207b84d03.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/accept.js"></script>
     <title>Dashboard Page</title>
 </head>
 
@@ -40,19 +41,26 @@
                 <input placeholder="Search requests">
             </div>
             <div class="add-request-button">
-                <i class="fa-solid fa-plus"></i>
-                New Service
+                <a href="/addRequest"> <i class="fas fa-plus"></i>New Service</a>
             </div>
         </header>
         <section class="requests">
             <?php foreach($serviceRequests as $request): ?>
-                <div id="service-1">
+                <div id="<?= $request->getId(); ?>">
                     <img src="public/uploads/<?= $request->getImage() ?>">
                     <div>
                         <h2><?= $request->getBikeName() ?></h2>
                         <p><?= $request->getDescription() ?></p>
-<!--                        <p>Price: 200 zł</p>-->
-<!--                        <p>Date: 10-06-2023</p>-->
+                        <p><?= "Price: ".$request->getPrice()." zł" ?></p>
+                        <p><?= "Created at: ".$request->getDate() ?></p>
+                        <p name="isAccepted"><?php if($request->isAccepted() === 'true') {
+                            print("Accepted");
+                        } else {
+                            print("Not yet accepted");
+                        } ?></p>
+                        <input name="accept-button" type="button" onclick="acceptRequest(<?= $request->getId(); ?>)" value="Accept"
+                            <?php if($request->isAccepted() === 'true') { echo "disabled"; } ?>
+                        />
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -66,9 +74,11 @@
         <img src="">
         <div>
             <h2>bikeName</h2>
-            <p>description</p>
-            <p>price</p>
-            <p>date</p>
+            <p name="description">description</p>
+            <p name="price">price</p>
+            <p name="date">date</p>
+            <p name="isAccepted">isAccepted</p>
+            <input name="accept-button" type="button" value="Accept"/>
         </div>
     </div>
 </template>

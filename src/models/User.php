@@ -5,14 +5,18 @@ class User {
     private $name;
     private $password;
     private $email;
-    private $phone;
+    private $type;
 
-    public function __construct(string $email, string $password, string $name, string $surname, string $phone) {
+    public function __construct(string $email,
+                                string $password,
+                                string $name,
+                                string $surname,
+                                int $type) {
         $this->email = $email;
         $this->password = $password;
-         $this->name = $name;
-         $this->surname = $surname;
-        $this->phone = $phone;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->type = $type;
     }
 
     public function setEmail(string $email) {
@@ -47,7 +51,7 @@ class User {
          return $this->surname;
     }
 
-    public function getPhone(): string {
-        return $this->phone;
+    public function getType(): int {
+        return $this->type;
     }
 }

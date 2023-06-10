@@ -11,6 +11,6 @@ Routing::post('login', 'SecurityController');
 Routing::post('addRequest', 'RequestController');
 Routing::post('signUp', 'SecurityController');
 Routing::post('search', 'RequestController');
-Routing::post('requests', 'RequestController');
+Routing::post('acceptRequest', 'RequestController');
 
 Routing::run($path);

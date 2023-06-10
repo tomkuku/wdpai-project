@@ -101,7 +101,12 @@ li:last-child {
     font-size: 16px;
 }
 
-.add-request-button > i {
+.add-request-button>a {
+    color: white;
+}
+
+.add-request-button>a>i {
+    color: white;
     padding: 10px;
 }
 

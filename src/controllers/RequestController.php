@@ -15,26 +15,39 @@ class RequestController extends AppController {
 
     public function __construct() {
         parent::__construct();
+        session_start();
         $this->serviceRequestRepository = new ServiceRequestRepository();
     }
 
     public function addRequest() {
+        if (isset($_POST["cancel-button"])) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/serviceRequests");
+            return;
+        }
+
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->isFileValid($_FILES['file'])) {
             move_uploaded_file(
                 $_FILES['file']['tmp_name'], 
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            $serviceRequest = new ServiceRequest($_POST['bikename'], $_POST['description'], $_FILES['file']['name']);
+            $date = date('Y-m-d H:i:s');
 
-            var_dump($_POST);
+            $serviceRequest = new ServiceRequest(
+                $_POST['bikename'],
+                $_POST['description'],
+                $_FILES['file']['name'],
+                $_POST['price'],
+                "false",
+                $date
+            );
 
             $this->serviceRequestRepository->addRequest($serviceRequest);
 
-            return $this->render('requests', [
-                'messsages' => $this->messages,
-                'serviceRequests' => $this->serviceRequestRepository->getAllServiceRequests()
-            ]);
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/serviceRequests");
+            return;
         }
 
         $this->render('add-request', ['messsages' => $this->messages]);
@@ -54,7 +67,6 @@ class RequestController extends AppController {
     }
 
     public function serviceRequests() {
-        print("TEST 2");
         $requests = $this->serviceRequestRepository->getAllServiceRequests();
         $this->render('requests', ['serviceRequests' => $requests]);
     }
@@ -70,5 +82,12 @@ class RequestController extends AppController {
 
             echo json_encode($this->serviceRequestRepository->getRequestByBikeName($decoded['search']));
         }
+    }
+
+    public function acceptRequest(string $id) {
+        $id = intval($id);
+
+        $this->serviceRequestRepository->acceptRequest($id);
+        http_response_code(200);
     }
 } 

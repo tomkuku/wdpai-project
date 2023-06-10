@@ -23,20 +23,20 @@ class UserRepository extends Repository {
             $user['password'],
             $user['name'],
             $user['surname'],
-            $user['phone']
+            $user['type']
         );
     }
 
     public function addUser(User $user) {
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO user_details (name, surname, phone)
+            INSERT INTO user_details (name, surname, type)
             VALUES (?, ?, ?)
         ');
 
         $stmt->execute([
             $user->getName(),
             $user->getSurname(),
-            $user->getPhone()
+            $user->getType()
         ]);
 
         $stmt = $this->database->connect()->prepare('
@@ -53,11 +53,22 @@ class UserRepository extends Repository {
 
     public function getUserDetailsId(User $user): int {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM user_details WHERE name = :name AND surname = :surname AND phone = :phone
+            SELECT * FROM user_details WHERE name = :name AND surname = :surname
         ');
         $stmt->bindParam(':name', $user->getName(), PDO::PARAM_STR);
         $stmt->bindParam(':surname', $user->getSurname(), PDO::PARAM_STR);
-        $stmt->bindParam(':phone', $user->getPhone(), PDO::PARAM_STR);
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data['id'];
+    }
+
+    public function getUserId(User $user): int {
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM users WHERE email = :email AND password = :password
+        ');
+        $stmt->bindParam(':email', $user->getEmail(), PDO::PARAM_STR);
+        $stmt->bindParam(':password', $user->getPassword(), PDO::PARAM_STR);
         $stmt->execute();
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);

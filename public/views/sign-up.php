@@ -42,7 +42,12 @@
         
             <label><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" name="psw-repeat">
-                        
+
+            <select class="user-type" name="user-type" id="month">
+                <option value="1">I'm user</option>
+                <option value="2">I'm bike mechanic</option>
+            </select>
+
             <div class="clearfix">
                 <input class="cancel-button" type="submit" name="cancel-button" value="Cancel">
                 <button type="submit" class="sign-up-button">Sign Up</button>

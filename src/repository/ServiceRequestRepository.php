@@ -4,26 +4,6 @@ require_once 'Repository.php';
 require_once __DIR__.'/../models/ServiceRequest.php';
 
 class ServiceRequestRepository extends Repository {
-    public function getServiceRequest(int $id): ?ServiceRequest {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM service_request WHERE id = :id;
-        ');
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $request = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($request == false) {
-            return null;
-        }
-
-        return new ServiceRequest(
-            "Trek Slash",
-            "Cos",
-            "cos"
-        );
-    }
-
     public function getAllServiceRequests(): array {
         $result = [];
 
@@ -37,7 +17,11 @@ class ServiceRequestRepository extends Repository {
             $result[] = new ServiceRequest(
                 $request['bike_name'],
                 $request['description'],
-                $request['file_name']
+                $request['file_name'],
+                $request['price'],
+                $request['is_accepted'],
+                $request['date'],
+                $request['id']
             );
         }
 
@@ -46,19 +30,20 @@ class ServiceRequestRepository extends Repository {
 
     public function addRequest(ServiceRequest $request) {
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO public.service_request (bike_name, description, price, file_name, owner_id)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO public.service_request (bike_name, description, price, file_name, owner_id, is_accepted, date)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ');
 
-        $price = 200;
-        $owner_id = 3;
+        $owner_id = (int)$_SESSION['user-id'];
 
         $stmt->execute([
             $request->getBikeName(),
             $request->getDescription(),
-            $price,
+            $request->getPrice(),
             $request->getImage(),
-            $owner_id
+            $owner_id,
+            $request->isAccepted(),
+            $request->getDate()
         ]);
     }
 
@@ -72,5 +57,17 @@ class ServiceRequestRepository extends Repository {
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function acceptRequest(int $id) {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE service_request SET "is_accepted" = :accepted WHERE id = :id
+         ');
+
+        $accepted = 'true';
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':accepted', $accepted, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
