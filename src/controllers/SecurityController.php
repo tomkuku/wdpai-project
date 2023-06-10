@@ -58,7 +58,7 @@ class SecurityController extends AppController {
 
         $name = $_POST["name"];
         $surname = $_POST["surname"];
-        $phone = "123456789";
+        $userType = (int)$_POST["user-type"];
 
         $user = $this->userRepository->getUser($email);
 
@@ -70,16 +70,16 @@ class SecurityController extends AppController {
             return $this->render('sign-up', ['messages' => ["Passwords are not equal!"]]);
         }
 
-        $this->render('sign-up', ['messages' => ["Account created!"]]);
-
         $user = new User(
             $email,
             $password1,
             $name,
             $surname,
-            $phone
+            $userType
         );
 
         $this->userRepository->addUser($user);
+
+        $this->render('login', ["messages" => ["Account created!"]]);
     }
 } 

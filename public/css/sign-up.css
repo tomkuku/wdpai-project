@@ -103,6 +103,12 @@ hr {
     justify-content: center;
 }
 
+.user-type {
+  width: 30%;
+  height: 30px;
+  margin-bottom: 40px;
+}
+
 .clearfix::after {
   content: "";
   clear: both;

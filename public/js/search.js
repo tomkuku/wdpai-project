@@ -1,22 +1,6 @@
 const search = document.querySelector('input[placeholder="Search requests"]');
 const requestContainer = document.querySelector(".requests");
 
-// function acceptRequest(id) {
-//     console.log("UUUU");
-//     console.log(id);
-//
-//     const query = 'div[id="'.concat(id,'"]')
-//     const container = document.querySelector(query);
-//     const isAcceptedField = container.querySelector('p[name="isAccepted"]');
-//     const button = container.querySelector('button[name="accept-button"]');
-//
-//     fetch(`/acceptRequest/${id}`)
-//         .then(function () {
-//             isAcceptedField.innerHTML = 'Accepted';
-//             button.disabled = true;
-//         })
-// }
-
 search.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
